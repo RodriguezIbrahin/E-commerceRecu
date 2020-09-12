@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const routes = require('./routes/index.js');
 
 const app = express();
 app.use(cors());
@@ -10,10 +11,7 @@ app.name = 'API';
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
-
-app.get("/", (req, res) =>{
-    res.send("Aca Estoy");
-});
+app.use('/', routes);
 
 // Error catching endware.
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
