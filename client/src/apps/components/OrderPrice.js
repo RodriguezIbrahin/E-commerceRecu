@@ -15,7 +15,6 @@ import * as actionCreators from "../../redux/actions/actions";
 
 export function OrderPrice({Url, UrlForPage, SearchQueryCache, UrlCondition, UrlForPrice}) {
 
-    Url = "q=a"
 
 
     const Ascendente = (event)=>{

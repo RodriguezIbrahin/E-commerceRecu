@@ -5,17 +5,18 @@ import { useTheme } from '@material-ui/core/styles';
 
 import ResultsSB from "./ResultsSB";
 import OrderPrice from "../components/OrderPrice"
+import FilterCondition from "../components/FilterCondition"
+import PaginationControlled from "../components/Pagination";
+import SearchBar2 from "../components/SearchBar2";
 
 import { 
-  Drawer ,AppBar, Toolbar, List, CssBaseline, Typography, 
-  Divider, IconButton, ListItem, InputBase, ListItemIcon, ListItemText 
+  Drawer ,AppBar, Toolbar, CssBaseline, Typography, 
+  Divider, IconButton, InputBase
 } from '@material-ui/core';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import LabelIcon from '@material-ui/icons/Label';
-import LabelOffIcon from '@material-ui/icons/LabelOff';
 import SearchIcon from '@material-ui/icons/Search';
 
 
@@ -32,6 +33,10 @@ export default function MiniDrawer() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleSearchChange = (e) => {
+    console.log(e.target.value)
   };
 
 
@@ -60,19 +65,7 @@ export default function MiniDrawer() {
           <Typography className={classes.title} variant="h6" noWrap>
             Proyecto Complementario
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
+          <SearchBar2/>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -96,20 +89,12 @@ export default function MiniDrawer() {
         <Divider />
         <OrderPrice/>
         <Divider />
-        <List>
-          <ListItem button key={"New"}>
-            <ListItemIcon><LabelIcon/></ListItemIcon>
-            <ListItemText primary={"New"} />
-          </ListItem>
-          <ListItem button key={"Used"}>
-            <ListItemIcon><LabelOffIcon /></ListItemIcon>
-            <ListItemText primary={"Used"} />
-          </ListItem>          
-        </List>
+        <FilterCondition/>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <ResultsSB/>
+        <PaginationControlled/>
       </main>
     </div>
   );
