@@ -1,10 +1,11 @@
 import React from "react";
 import { Grid, Container } from '@material-ui/core';
-import ProductCard from "../components/ProductCard";
+import ProductCardML from "../components/ProductCardML";
 import {useStyles} from "../../styles/Styles";
+import Status204 from "../../components/Status204"
 
 
-export default function CatalogoConteiner(props) {
+export default function CatalogoConteinerML(props) {
     const classes = useStyles();
 
     return(
@@ -13,8 +14,9 @@ export default function CatalogoConteiner(props) {
 
             <Grid container spacing={6}>
                 
-                {props.props && props.props.map( products =>
-                  <ProductCard
+                {props.props.length === 0 ? <Status204/> : props.props.map( products =>
+                
+                  <ProductCardML
 
                   title= {products.title}
                   id = {products.id}

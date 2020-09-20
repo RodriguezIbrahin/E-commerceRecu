@@ -9,6 +9,8 @@ export const URL_FILTER_ORDER = "URL_FILTER_ORDER";
 export const URL_PAGE = "URL_PAGE";
 export const URL_PRICE = "URL_PRICE";
 export const URL_CONDITION = "URL_CONDITION";
+export const APP_ML = "APP_ML";
+export const CACHE_PRODUCTS = "CACHE_PRODUCTS"
 
 // Traigo los productos de MercadoLibre
 
@@ -48,7 +50,9 @@ export function PostProducts(payload) {
 
 export function PostAllProducts(payload){
   return function(dispatch){
+
     payload && payload.map(products =>{
+
       let product ={
         title: products.title,
         id: products.id,
@@ -63,6 +67,7 @@ export function PostAllProducts(payload){
       .then(ress =>{
         dispatch({ type: POST_DB_PRODUCTS, payload: ress.data });  // despacha la accion POST_DB_PRODUCTS
       })
+      
       .catch(err => {
         alert("algo salio mal")
         console.log(err)
@@ -74,7 +79,7 @@ export function PostAllProducts(payload){
 }
 
 
-//CACHE DE PRODUCTOS
+//BUSCO PRODUCTOS, GUARDO EN CACHE Y PRODUCTOS
 
 export function SearchQueryCache(payload){
   return function(dispatch){
@@ -147,4 +152,22 @@ export function onClickPage(payload){
   return function (dispatch) {
     dispatch(SearchQueryCache(payload[1] + "&p=" +payload[0]));
   } 
+}
+
+//tipo page
+
+export function APPorML(payload){
+  return{
+    type: APP_ML,
+    payload
+  }
+}
+
+//cache products
+
+export function CacheProducts(payload){
+  return{
+    type: CACHE_PRODUCTS,
+    payload
+  }
 }

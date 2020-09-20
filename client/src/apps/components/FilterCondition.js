@@ -9,34 +9,72 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import * as actionCreators from "../../redux/actions/actions";
 
+import { animateScroll as scroll} from "react-scroll";
 
 
-export function FilterCondition({ Url, UrlForPage, SearchQueryCache, UrlPrice, UrlForCondition }) {
+
+export function FilterCondition({CacheProducts, SearchCacheProducts, Url, UrlForPage, SearchQueryCache, UrlPrice, UrlForCondition }) {
 
 
     const New = (event)=>{
 
-        UrlForCondition("&c=new");
-        UrlForPage(Url + UrlPrice + "&c=new");
-        SearchQueryCache(Url + UrlPrice + "&c=new"); 
+        let news = "http://localhost:3001/api/search?" + Url + UrlPrice + "&c=new";
 
-    }
+        if(SearchCacheProducts[news]){
+
+            UrlForCondition("&c=new");
+            UrlForPage(Url + UrlPrice + "&c=new");
+            CacheProducts(SearchCacheProducts[news]); 
+            scroll.scrollToTop();
+        }
+        if(!SearchCacheProducts[news]){
+
+            UrlForCondition("&c=new");
+            UrlForPage(Url + UrlPrice + "&c=new");
+            SearchQueryCache(Url + UrlPrice + "&c=new"); 
+            scroll.scrollToTop();  
+        };
+    };
 
     const Used = (event)=>{
 
-        UrlForCondition("&c=used");
-        UrlForPage(Url + UrlPrice + "&c=used");
-        SearchQueryCache(Url + UrlPrice + "&c=used");
+        let used = "http://localhost:3001/api/search?" + Url + UrlPrice + "&c=used";
 
-    }
+        if(SearchCacheProducts[used]){
+
+            UrlForCondition("&c=used");
+            UrlForPage(Url + UrlPrice + "&c=used");
+            CacheProducts(SearchCacheProducts[used]);
+            scroll.scrollToTop();
+        }
+        if(!SearchCacheProducts[used]){
+
+            UrlForCondition("&c=used");
+            UrlForPage(Url + UrlPrice + "&c=used");
+            SearchQueryCache(Url + UrlPrice + "&c=used");
+            scroll.scrollToTop();   
+        };
+    };
     
     const Indistinto = (event)=>{
 
-        UrlForCondition("");
-        UrlForPage(Url + UrlPrice + "");
-        SearchQueryCache(Url + UrlPrice + "");
+        let indis = "http://localhost:3001/api/search?" + Url + UrlPrice + "";
 
-    }
+        if(SearchCacheProducts[indis]){
+
+            UrlForCondition("");
+            UrlForPage(Url + UrlPrice + "");
+            CacheProducts(SearchCacheProducts[indis]);
+            scroll.scrollToTop(); 
+        }
+        if(!SearchCacheProducts[indis]){
+
+            UrlForCondition("");
+            UrlForPage(Url + UrlPrice + "");
+            SearchQueryCache(Url + UrlPrice + "");
+            scroll.scrollToTop();  
+        };
+    };
     
     
         
@@ -69,17 +107,18 @@ export function FilterCondition({ Url, UrlForPage, SearchQueryCache, UrlPrice, U
         </List>
 
     );
-}
+};
 
 function mapStateToProps(state) {
     return {
         Url: state.Url,
         UrlPrice: state.UrlPrice,
-    }
-}
+        SearchCacheProducts: state.SearchCacheProducts
+    };
+};
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(actionCreators, dispatch);
-}
+};
   
 export default connect(mapStateToProps, mapDispatchToProps)(FilterCondition);

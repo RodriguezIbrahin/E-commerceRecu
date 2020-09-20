@@ -2,25 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import * as actionCreators from "../../redux/actions/actions";
-import ProductCardML from "../components/ProductCardML";
+import CatalogoConteinerML from "./CatalogoContainerML"
 
 export class ResultsSBML extends React.Component {
 
     render(){
 
         return(
-            <div>
-               {this.props.ProductsML && this.props.ProductsML.map( products => 
-                <ProductCardML
-                title= {products.title}
-                id = {products.id}
-                price = {products.price}
-                currency_id = {products.currency_id}
-                available_quantity = {products.available_quantity}
-                thumbnail = {products.thumbnail}
-                condition = {products.condition}
-                />)}
-          </div>
+
+            <CatalogoConteinerML props={this.props.ProductsML} />
+
         )
     }
 }; 

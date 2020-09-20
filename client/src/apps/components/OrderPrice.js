@@ -11,35 +11,73 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import * as actionCreators from "../../redux/actions/actions";
 
+import { animateScroll as scroll} from "react-scroll";
 
 
-export function OrderPrice({Url, UrlForPage, SearchQueryCache, UrlCondition, UrlForPrice}) {
 
+export function OrderPrice({CacheProducts, SearchCacheProducts, Url, UrlForPage, SearchQueryCache, UrlCondition, UrlForPrice}) {
 
 
     const Ascendente = (event)=>{
 
-        UrlForPrice("&o=asc");
-        UrlForPage(Url + "&o=asc" + UrlCondition);
-        SearchQueryCache(Url + UrlCondition + "&o=asc"); 
+        let asc ="http://localhost:3001/api/search?" + Url + "&o=asc" + UrlCondition;
 
-    }
+        if(SearchCacheProducts[asc]){
+
+            UrlForPrice("&o=asc");
+            UrlForPage(Url + "&o=asc" + UrlCondition);
+            CacheProducts(SearchCacheProducts[asc]); 
+            scroll.scrollToTop();  
+        }
+        if(!SearchCacheProducts[asc]){
+
+            UrlForPrice("&o=asc");
+            UrlForPage(Url + "&o=asc" + UrlCondition);
+            SearchQueryCache(Url + UrlCondition + "&o=asc"); 
+            scroll.scrollToTop();
+        };
+    };
     
     const Descendente = (event)=>{
 
-      UrlForPrice("&o=desc");
-      UrlForPage(Url + "&o=desc" + UrlCondition);
-      SearchQueryCache(Url + UrlCondition + "&o=desc");
-        
-    }
+        let desc = "http://localhost:3001/api/search?" + Url + "&o=desc" + UrlCondition;
+
+        if(SearchCacheProducts[desc]){
+
+            UrlForPrice("&o=desc");
+            UrlForPage(Url + "&o=desc" + UrlCondition);
+            CacheProducts(SearchCacheProducts[desc]);
+            scroll.scrollToTop();
+        }
+        if(!SearchCacheProducts[desc]){
+
+            UrlForPrice("&o=desc");
+            UrlForPage(Url + "&o=desc" + UrlCondition);
+            SearchQueryCache(Url + UrlCondition + "&o=desc");
+            scroll.scrollToTop();
+        };
+    };
 
     const Indiferente = (event)=>{
 
-        UrlForPrice("");
-        UrlForPage(Url + "" + UrlCondition);
-        SearchQueryCache(Url + UrlCondition + "");
-          
-    }
+        let ind = "http://localhost:3001/api/search?" + Url + "" + UrlCondition;
+
+        if(SearchCacheProducts[ind]){
+
+            UrlForPrice("");
+            UrlForPage(Url + "" + UrlCondition);
+            CacheProducts(SearchCacheProducts[ind]);
+            scroll.scrollToTop();
+        }
+        if(!SearchCacheProducts[ind]){
+
+            UrlForPrice("");
+            UrlForPage(Url + "" + UrlCondition);
+            SearchQueryCache(Url + UrlCondition + "");
+            scroll.scrollToTop();
+        };
+       
+    };
   
 
   return (
@@ -60,7 +98,7 @@ export function OrderPrice({Url, UrlForPage, SearchQueryCache, UrlCondition, Url
                     <ArrowUpwardSharpIcon/>
                 </ListItemIcon>
 
-                <ListItemText primary={"Ascendente"} />
+                <ListItemText primary={"Ascendant"} />
 
             </ListItem>
 
@@ -70,24 +108,25 @@ export function OrderPrice({Url, UrlForPage, SearchQueryCache, UrlCondition, Url
                     <ArrowDownwardSharpIcon />
                 </ListItemIcon>
 
-                <ListItemText primary={"Desencente"} />
+                <ListItemText primary={"Descent"} />
 
             </ListItem>  
 
         </List>
-    )
+    );
  
-}
+};
 
 function mapStateToProps(state) {
   return {
-    Url: state.Url,
-    UrlCondition: state.UrlCondition
-  }
-}
+       Url: state.Url,
+       UrlCondition: state.UrlCondition,
+       SearchCacheProducts: state.SearchCacheProducts
+    };
+};
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(actionCreators, dispatch);
-}
+};
   
 export default connect(mapStateToProps, mapDispatchToProps)(OrderPrice);

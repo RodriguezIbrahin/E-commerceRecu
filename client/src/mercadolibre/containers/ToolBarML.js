@@ -1,21 +1,16 @@
 import React from 'react';
 import clsx from 'clsx';
-
+import { Link } from 'react-router-dom'
 import { useStyles2 } from "../../styles/Styles";
 import { useTheme } from '@material-ui/core/styles';
 
-import ResultsSB from "./ResultsSB";
-import OrderPrice from "../components/OrderPrice"
-import FilterCondition from "../components/FilterCondition"
-import PaginationControlled from "../components/Pagination";
-import SearchBar2 from "../components/SearchBar2";
+import AddDB from "../components/AddDB"
+import SearchBarML from "../components/SearchBarML";
+import ResultsSBML from "./ResultsSBML"
 import ScrollTop from "../../components/TopButton"
 import Fotter from "../../components/Fotter"
 
-
-import { 
-  Drawer ,AppBar, Toolbar, CssBaseline, Typography, Divider, IconButton, Fab
-} from '@material-ui/core';
+import { Drawer ,AppBar, Toolbar, CssBaseline, Typography, Divider, IconButton, Fab } from '@material-ui/core';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -23,7 +18,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 
-export default function MiniDrawer(props) {
+export default function MiniDrawerML(props) {
   const classes = useStyles2();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -54,14 +49,13 @@ export default function MiniDrawer(props) {
             edge="start"
             className={clsx(classes.menuButton, {
               [classes.hide]: open,
-            })}
-          >
+            })}>  
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap >
-            Proyecto Complementario
+          <Typography className={classes.title} variant="h6" noWrap>
+            Mercado Libre
           </Typography>
-          <SearchBar2/>
+          <SearchBarML/>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -79,25 +73,22 @@ export default function MiniDrawer(props) {
 
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon/>}
           </IconButton>
         </div>
         <Divider />
-        <OrderPrice/>
-        <Divider />
-        <FilterCondition/>
+        <AddDB/>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <ResultsSB/>
-        <PaginationControlled/>
+        <ResultsSBML/>
         <ScrollTop {...props}>
           <Fab color="primary" size="medium" aria-label="scroll back to top">
             <KeyboardArrowUpIcon />
           </Fab>
-        </ScrollTop>
+        </ScrollTop> 
         <Fotter/>
       </main>
-    </div>  
+    </div>
   );
 }

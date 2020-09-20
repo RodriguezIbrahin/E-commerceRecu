@@ -28,12 +28,30 @@ export const useStyles = makeStyles((theme) => ({
   },
   footer: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
+    position: 'fixed',
+    bottom: theme.spacing(2),
+  },
+  root: {
+    position: 'fixed',
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
   },
   root2: {
     '& > * + *': {
       marginTop: theme.spacing(2),
     },
+  },
+  pagination: {
+    position: 'fixed',
+    bottom: theme.spacing(6),
+  },
+  changepage: {
+    position: 'fixed',
+    top: theme.spacing(8),
+    right: theme.spacing(2),
+  },
+  Media: {
+    paddingbottom: '56.25%', // 16:9
   },
 }));
 
