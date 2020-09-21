@@ -5,7 +5,7 @@ const initialState = {
     SearchCacheProducts: {},                             // productos en cache aun falta
     SearchProducts: [],            // productos de la busqueda
     ProductDB: [],                 // producto en particular
-    PageTotal: 1,                 //total de paginas
+    PageTotal: 1,                  //total de paginas
     Url: "",                       // url de la busqueda, listo para filtros
     UrlPage: "",
     UrlPrice:"",
@@ -37,7 +37,7 @@ export default function rootReducer(state = initialState, action) {
 
       let NewSearch = {};
 
-      NewSearch[propiedad] = value;
+      NewSearch[propiedad] = [value, PageForSearch];
 
       Object.assign(NewSearch, state.SearchCacheProducts)
 
@@ -90,7 +90,8 @@ export default function rootReducer(state = initialState, action) {
 
      return {
        ...state,
-       SearchProducts: action.payload,
+       SearchProducts: action.payload[0],
+       PageTotal: action.payload[1]
       }
       
     default:

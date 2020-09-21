@@ -23,7 +23,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 
-export default function MiniDrawer(props) {
+export default function ToolBar(props) {
   const classes = useStyles2();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);

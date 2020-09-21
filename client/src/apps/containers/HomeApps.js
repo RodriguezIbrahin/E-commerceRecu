@@ -1,12 +1,12 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import ResultsSB from "./ResultsSB";
-import MiniDrawer from "./ToolBar";
+import ToolBar from "./ToolBar";
 
 function Home() {
   return (
     <BrowserRouter>
-    <Route exact path="/" component={MiniDrawer}/>
+    <ToolBar/>
     </BrowserRouter>
   );
 }

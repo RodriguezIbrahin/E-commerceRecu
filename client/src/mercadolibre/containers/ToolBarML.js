@@ -18,7 +18,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 
-export default function MiniDrawerML(props) {
+export default function ToolBarML(props) {
   const classes = useStyles2();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
