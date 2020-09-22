@@ -4,6 +4,7 @@ import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 
 import LabelIcon from '@material-ui/icons/Label';
 import LabelOffIcon from '@material-ui/icons/LabelOff';
+import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
@@ -83,6 +84,15 @@ export function FilterCondition({CacheProducts, SearchCacheProducts, Url, UrlFor
   return (
 
         <List>
+            <ListItem button onClick={Indistinto} key={"Indistinto"}>
+
+                <ListItemIcon>
+                    <LabelImportantIcon/>
+                </ListItemIcon>
+
+               <ListItemText primary={"Indistinto"} />
+
+            </ListItem>
 
             <ListItem button onClick={New} key={"New"}>
 
